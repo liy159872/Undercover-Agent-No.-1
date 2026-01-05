@@ -2,7 +2,7 @@
   <div class="Main">
     <div class="w-full">
       <div class="logo-home">
-        <img class="w-full max-w-[20rem] h-auto mx-auto" src="/static/logo.png" alt="谁是卧底" />
+        <img class="w-full max-w-[20rem] h-auto mx-auto" src="/static/logo.png" alt="一号卧底" />
       </div>
       <div class="w-full text-center">
         <router-link
