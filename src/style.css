@@ -1,0 +1,211 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+* {
+  font-family: "MiSans VF", MiSans, ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji" !important;
+}
+
+/* Modal兼容性修复 - 确保未选中时隐藏 */
+.modal-toggle {
+  display: none;
+}
+
+.modal-toggle:not(:checked) ~ .modal {
+  display: none !important;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-toggle:checked ~ .modal {
+  display: flex !important;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal位置修复 - 旧浏览器fallback */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 32rem;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.has-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  background: transparent;
+}
+
+.has-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.has-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:root {
+  /* HEX/RGB fallback for legacy browsers - 使用原始颜色值确保一致性 */
+  --theme-yellow: #ffca32;
+  --theme-gray: #b6b6b6;
+  --theme-blue: #648dff;
+  --bg-black: #333333;
+  --bg-gray: #cbcbcb;
+  
+  /* DaisyUI standard colors - RGB fallback */
+  --color-primary: #648dff;
+  --color-secondary: #d946ef;
+  --color-accent: #34d399;
+  --color-neutral: #2a303c;
+  --color-base-100: #ffffff;
+  --color-base-200: #f8fafc;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #1f2937;
+  
+  /* Semantic colors - RGB fallback */
+  --color-info: #3b82f6;
+  --color-success: #22c55e;
+  --color-warning: #fb923c;
+  --color-error: #ef4444;
+}
+
+#bg {
+  background-color: rgb(82, 116, 209);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#app,
+.Main {
+  background-color: rgb(82, 116, 209);
+  background-image: url("/static/bg.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 425px;
+  height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-color: rgb(156, 163, 175);
+}
+/* 图片资源预加载 */
+#app::after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url("/static/logo.png ")
+    url("/static/card-eliminated.png")
+    url("/static/card-viewed.png")
+    url("/static/card.png")
+}
+
+/* .modal {
+  position: absolute;
+} */
+
+.game-btn {
+  background-color: var(--theme-yellow);
+  display: block;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: bold;
+  border-radius: 1.5rem;
+  border-width: 3px;
+  border-style: solid;
+  border-color: rgb(55, 65, 81);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  max-width: 250px;
+  cursor: pointer;
+}
+
+.game-btn.game-btn-small {
+  max-width: 200px;
+}
+
+.game-btn.disabled {
+  background-color: var(--theme-gray) !important;
+  cursor: not-allowed !important;
+  border-color: var(--theme-gray) !important;
+}
+
+.stroke {
+  color: var(--font-color);
+  letter-spacing: 0;
+  font-weight: 700;
+  text-shadow: var(--stroke-color) 4px 0 0,
+    var(--stroke-color) 3.87565px 0.989616px 0,
+    var(--stroke-color) 3.51033px 1.9177px 0,
+    var(--stroke-color) 2.92676px 2.72656px 0,
+    var(--stroke-color) 2.16121px 3.36588px 0,
+    var(--stroke-color) 1.26129px 3.79594px 0,
+    var(--stroke-color) 0.282949px 3.98998px 0,
+    var(--stroke-color) -0.712984px 3.93594px 0,
+    var(--stroke-color) -1.66459px 3.63719px 0,
+    var(--stroke-color) -2.51269px 3.11229px 0,
+    var(--stroke-color) -3.20457px 2.39389px 0,
+    var(--stroke-color) -3.69721px 1.52664px 0,
+    var(--stroke-color) -3.95997px 0.56448px 0,
+    var(--stroke-color) -3.97652px -0.432781px 0,
+    var(--stroke-color) -3.74583px -1.40313px 0,
+    var(--stroke-color) -3.28224px -2.28625px 0,
+    var(--stroke-color) -2.61457px -3.02721px 0,
+    var(--stroke-color) -1.78435px -3.57996px 0,
+    var(--stroke-color) -0.843183px -3.91012px 0,
+    var(--stroke-color) 0.150409px -3.99717px 0,
+    var(--stroke-color) 1.13465px -3.8357px 0,
+    var(--stroke-color) 2.04834px -3.43574px 0,
+    var(--stroke-color) 2.83468px -2.82216px 0,
+    var(--stroke-color) 3.44477px -2.03312px 0,
+    var(--stroke-color) 3.84068px -1.11766px 0,
+    var(--stroke-color) 3.9978px -0.132717px 0;
+}
